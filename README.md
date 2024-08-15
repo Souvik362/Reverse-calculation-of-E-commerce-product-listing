@@ -1,0 +1,1 @@
+Developed a Python script to calculate the selling margin on Amazon, considering product costs, platform fees, shipping, and GST. This tool helps in determining the profitability of each product sold online, ensuring accurate financial planning for e-commerce sellers.
