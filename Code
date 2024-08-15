@@ -1,0 +1,70 @@
+#Input Section
+PCP= int(input("Enter the Product Cost Price Rs: "))    #Product CostPrice
+AD= int(input("Enter the Amazon Display Price Rs: "))   #Amazon Display(How much Price Seller wants to Sell)
+#SMg=int(input("Enter the Seller Margin (%):"))         #Seller Margin(How much Seller wants to keep margin)
+#SM= (SMg/100)*PCP                                      #seller margin Calculation
+PC= int(input("Enter the Packing charge Rs: "))         #Packing Cost
+Print_C=3                                               #Fixed Printing Cost
+Wt= int(input("Enter the product volumetric weight(gms): "))      #Product Weight
+GST= int(input("Enter the product input GST(%): "))      #Product GST %
+GST = GST/100
+
+#Constants
+Ship_C= 81                                            #Min shipping cost for 500gms Easy Ship National
+#GST=0.18                                              #GST at 18%
+Z=0                                                    #Price for extra weight calculation
+
+#Final Seller cost
+#Final_SC=(PCP+PC+Print_C+SM)
+Final_SC=(PCP+PC+Print_C)
+print("Product Cost Packaging & Printing Price Rs: ",Final_SC)
+
+
+#Platform Commission Calculation based on Category LED
+if AD <=300:
+    Pf_Commission= 0.09 * AD
+#elif AD >=500 and AD <=1000:
+#    Pf_Commission= 0.16 * AD
+else:
+    Pf_Commission= 0.14* AD
+
+print("Platform Commission/Refferal Fee: ",Pf_Commission)
+
+
+#CLosing Fee calculation
+if AD <=250:
+    CF= 4
+elif AD >=251 and AD <=500:
+    CF= 9
+elif AD >=501 and AD <=1000:
+    CF= 30
+else:
+    CF=61
+    print("Closing Fee Rs: ",CF)
+
+#Weight Calculation for Shippment
+if Wt > 500:
+    X = (Wt - 500)
+    R = (X // 500) + 1
+    Z = R * 25            #For every additional 500gms Rs 25 is charged.
+else:
+    Z=0
+print("Additional Weight Cost Rs: ",Z)
+#Final Shipping Cost
+F_Shipping_c = Z +Ship_C
+print("Final Shipping Cost",F_Shipping_c)
+
+
+#Total Cost before GST
+Total_Cost= (Final_SC+ Pf_Commission+ CF+ F_Shipping_c)
+print("Total_Cost: before GST Rs: ",Total_Cost)
+
+# Listing Price Calculation inc. GST
+GST =round(AD *GST)
+print("Total Chargable GST Rs: ",GST)
+
+# Seller Margin Calculation inc. GST
+Total_Cost =Total_Cost +GST
+SM =AD- Total_Cost
+
+print("For The Listing Price Rs ",AD," Inc. GST Seller Mergin is Rs ", SM)
